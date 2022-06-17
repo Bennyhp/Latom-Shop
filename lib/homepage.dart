@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'historypage.dart';
+import 'package:get/get.dart';
+import 'codmpage.dart';
+import 'ffpage.dart';
+import 'mlpage.dart';
 import 'profilepage.dart';
 import 'misc/color.dart';
+import 'pubgmpage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -25,80 +28,81 @@ class HomePageComps extends StatelessWidget {
       backgroundColor: MainBgColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(height: 50),
-                Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  height: 200,
-                  child: PageView(
-                    pageSnapping: true,
-                    children: <Widget>[
-                      Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.asset(
-                            "assets/promos/promo1.jpeg",
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.asset(
-                            "assets/promos/promo2.jpeg",
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.asset(
-                            "assets/promos/promo3.jpeg",
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.asset(
-                            "assets/promos/promo4.jpeg",
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(height: 50),
+              Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 50),
-                Text(
-                  "TOP UP",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 35,
-                    color: Red,
-                  ),
+                height: 200,
+                child: PageView(
+                  pageSnapping: true,
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        "assets/promos/promo1.jpeg",
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        "assets/promos/promo2.jpeg",
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        "assets/promos/promo3.jpeg",
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        "assets/promos/promo4.jpeg",
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 10),
-                Container(
-                  height: 300,
-                  child: GridView(
-                    children: [
-                      Card(
+              ),
+              SizedBox(height: 20),
+              Text(
+                "TOP UP",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 35,
+                  color: Red,
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                height: 300,
+                child: GridView(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20),
+                  children: [
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => MLPage(),
+                          )),
+                      child: Card(
                         elevation: 5,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
@@ -107,7 +111,14 @@ class HomePageComps extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             child: Image.asset("assets/games/ml.png")),
                       ),
-                      Card(
+                    ),
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => FFPage(),
+                          )),
+                      child: Card(
                         elevation: 5,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
@@ -116,7 +127,14 @@ class HomePageComps extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             child: Image.asset("assets/games/ff.png")),
                       ),
-                      Card(
+                    ),
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => CODMPage(),
+                          )),
+                      child: Card(
                         elevation: 5,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
@@ -125,7 +143,14 @@ class HomePageComps extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             child: Image.asset("assets/games/codm.png")),
                       ),
-                      Card(
+                    ),
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => PUBGMPage(),
+                          )),
+                      child: Card(
                         elevation: 5,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
@@ -135,40 +160,17 @@ class HomePageComps extends StatelessWidget {
                           child: Image.asset("assets/games/pubgm.png"),
                         ),
                       ),
-                    ],
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 20,
-                        crossAxisSpacing: 20),
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 }
-
-Widget buildGridGame() => GridView(
-      children: [
-        Container(
-          child: Image.asset("assets/games/ml.png"),
-        ),
-        Container(
-          child: Image.asset("assets/games/ff.png"),
-        ),
-        Container(
-          child: Image.asset("assets/games/codm.png"),
-        ),
-        Container(
-          child: Image.asset("assets/games/pubgm.png"),
-        ),
-      ],
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, mainAxisSpacing: 10, crossAxisSpacing: 10),
-    );
 
 class BodyNavBar extends StatefulWidget {
   const BodyNavBar({Key? key}) : super(key: key);
@@ -200,7 +202,7 @@ class _BodyNavBarState extends State<BodyNavBar> {
         },
         selectedItemColor: Red,
         unselectedItemColor: MainBgColor,
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],

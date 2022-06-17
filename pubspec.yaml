@@ -64,6 +64,7 @@ flutter:
   - assets/logo/
   - assets/games/
   - assets/promos/
+  - assets/wallet/
     # - images/a_dot_burr.jpeg
     # - images/a_dot_ham.jpeg
 
