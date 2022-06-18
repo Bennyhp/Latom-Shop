@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'homepage.dart';
 import 'misc/color.dart';
+import 'recieptpage.dart';
 import 'splashscreen.dart';
 import 'package:get/get.dart';
 

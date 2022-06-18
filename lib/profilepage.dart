@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'misc/color.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -6,17 +7,18 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: DarkRed,
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
           SizedBox(height: MediaQuery.of(context).size.height / 10),
           Center(
             child: Container(
-              width: 128,
-              height: 128,
+              width: 200,
+              height: 200,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/logo/logo.jpg"),
+                  image: AssetImage("assets/logo/logo_splash.jpg"),
                   fit: BoxFit.cover,
                 ),
                 color: Colors.transparent,
@@ -33,6 +35,7 @@ class ProfilePage extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
+                color: MainBgColor,
               ),
             ),
           ),
@@ -43,7 +46,8 @@ class ProfilePage extends StatelessWidget {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: StadiumBorder(),
-                onPrimary: Colors.white,
+                primary: MainBgColor,
+                onPrimary: DarkPurple,
                 padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
               ),
               child: Text("Edit Password"),
@@ -55,13 +59,21 @@ class ProfilePage extends StatelessWidget {
           ),
           Center(
             child: Container(
+              height: 500,
+              width: MediaQuery.of(context).size.width * 0.9,
+              decoration: BoxDecoration(
+                color: MainBgColor,
+                borderRadius: BorderRadius.circular(15),
+              ),
               child: Column(
                 children: [
+                  SizedBox(height: 50),
                   Text(
                     "Histori Transaksi",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w500,
+                      color: DarkPurple,
                     ),
                     textAlign: TextAlign.left,
                   ),
@@ -74,6 +86,7 @@ class ProfilePage extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.receipt_long_outlined,
+                          color: DarkPurple,
                           size: 200,
                         ),
                       ],
@@ -84,19 +97,20 @@ class ProfilePage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      color: DarkPurple,
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 40,
                   ),
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text(
-                      "Top up sekarang",
-                    ),
+                    child: Text("Top up sekarang"),
                     style: ElevatedButton.styleFrom(
-                      shape: StadiumBorder(),
-                    ),
+                        shape: StadiumBorder(),
+                        primary: DarkPurple,
+                        onPrimary: MainBgColor,
+                        minimumSize: Size(200, 50)),
                   ),
                 ],
               ),

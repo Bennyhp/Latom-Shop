@@ -35,6 +35,7 @@ class DetailPage extends StatelessWidget {
       backgroundColor: DarkRed,
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             children: <Widget>[
               FutureBuilder(
