@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'loginpage.dart';
+import 'package:get/get.dart';
+import 'controllers/logregcontroller.dart';
 import 'misc/color.dart';
 
 class RegisPage extends StatelessWidget {
@@ -53,26 +55,30 @@ class RegisPage extends StatelessWidget {
   }
 
   _inputField(context) {
+    LogRegControl tc = Get.put(LogRegControl());
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SizedBox(height: 50),
         TextField(
+          controller: tc.ctrlEmail,
           decoration: InputDecoration(
-              hintText: "Email",
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide.none),
-              fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-              filled: true,
-              prefixIcon: Icon(
-                Icons.person,
-                color: DarkRed,
-              )),
+            hintText: "Email",
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: BorderSide.none),
+            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+            filled: true,
+            prefixIcon: Icon(
+              Icons.person,
+              color: DarkRed,
+            ),
+          ),
         ),
         SizedBox(height: 20),
         TextField(
+          controller: tc.ctrlPassword,
           decoration: InputDecoration(
             hintText: "Password",
             border: OutlineInputBorder(
@@ -89,7 +95,32 @@ class RegisPage extends StatelessWidget {
         ),
         SizedBox(height: 50),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () async {
+            try {
+              await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                  email: tc.ctrlEmail.text, password: tc.ctrlPassword.text);
+              tc.ctrlEmail.text = "";
+              tc.ctrlPassword.text = "";
+              Get.back();
+              Get.snackbar(
+                "Registrasi Berhasil",
+                "Silahkan Login",
+                duration: const Duration(seconds: 2),
+                backgroundColor: Red,
+                colorText: MainBgColor,
+              );
+            } on FirebaseAuthException catch (context) {
+              tc.ctrlEmail.text = "";
+              tc.ctrlPassword.text = "";
+              Get.snackbar(
+                "Registrasi Gagal",
+                "Pastikan Format Email Benar dan Panjang Password Lebih Dari 5",
+                duration: const Duration(seconds: 2),
+                backgroundColor: Red,
+                colorText: MainBgColor,
+              );
+            }
+          },
           child: Text(
             "Registrasi",
             style: TextStyle(fontSize: 20),
@@ -105,16 +136,22 @@ class RegisPage extends StatelessWidget {
   }
 
   _login(context) {
+    LogRegControl tc = Get.put(LogRegControl());
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text("Sudah punya akun? "),
         TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              "Sign In",
-              style: TextStyle(color: Red),
-            ))
+          onPressed: () {
+            tc.ctrlEmail.text = "";
+            tc.ctrlPassword.text = "";
+            Get.back();
+          },
+          child: Text(
+            "Sign In",
+            style: TextStyle(color: Red),
+          ),
+        )
       ],
     );
   }

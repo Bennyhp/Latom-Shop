@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:get/get.dart';
-import 'package:latom_shop/homepage.dart';
 import '../loginpage.dart';
 
 class SplashController extends GetxController {

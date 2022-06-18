@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'controllers/logregcontroller.dart';
 import 'homepage.dart';
 import 'misc/color.dart';
 import 'regispage.dart';
@@ -48,12 +51,14 @@ _header(context) {
 }
 
 _inputField(context) {
+  LogRegControl tc = Get.put(LogRegControl());
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       TextField(
+        controller: tc.ctrlEmail,
         decoration: InputDecoration(
-          hintText: "Username",
+          hintText: "Email",
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
               borderSide: BorderSide.none),
@@ -67,6 +72,7 @@ _inputField(context) {
       ),
       SizedBox(height: 10),
       TextField(
+        controller: tc.ctrlPassword,
         decoration: InputDecoration(
           hintText: "Password",
           border: OutlineInputBorder(
@@ -83,11 +89,24 @@ _inputField(context) {
       ),
       SizedBox(height: 10),
       ElevatedButton(
-        onPressed: () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (_) => HomePage(),
-            )),
+        onPressed: () async {
+          try {
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+                email: tc.ctrlEmail.text.trim(),
+                password: tc.ctrlPassword.text.trim());
+            Get.off(HomePage());
+          } on FirebaseAuthException catch (context) {
+            tc.ctrlEmail.text = "";
+            tc.ctrlPassword.text = "";
+            Get.snackbar(
+              "Login Gagal",
+              "Pastikan Email dan Password Benar",
+              duration: const Duration(seconds: 2),
+              backgroundColor: Red,
+              colorText: MainBgColor,
+            );
+          }
+        },
         child: Text(
           "Login",
           style: TextStyle(fontSize: 20),
@@ -103,6 +122,7 @@ _inputField(context) {
 }
 
 _signup(context) {
+  LogRegControl tc = Get.put(LogRegControl());
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
@@ -111,11 +131,11 @@ _signup(context) {
         style: TextStyle(color: DarkPurple),
       ),
       TextButton(
-          onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => RegisPage(),
-              )),
+          onPressed: () {
+            tc.ctrlEmail.text = "";
+            tc.ctrlPassword.text = "";
+            Get.to(RegisPage());
+          },
           child: Text(
             "Sign Up",
             style: TextStyle(
