@@ -188,7 +188,9 @@ class DetailPage extends StatelessWidget {
                 width: 150,
                 child: OutlinedButton(
                   onPressed: () async {
-                    if (tc.ctrlIDPlayer.text == "") {
+                    if (tc.ctrlIDPlayer.text == "" ||
+                        rc.buttonTopup.value == "" ||
+                        rc.buttonBayar.value == "") {
                       Get.snackbar(
                         "Top Up Gagal",
                         "Pastikan Inputan Tidak Kosong",

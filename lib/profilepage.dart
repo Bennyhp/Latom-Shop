@@ -84,7 +84,7 @@ class ProfilePage extends StatelessWidget {
           ),
           Center(
             child: Container(
-              height: tinggi * 0.65,
+              height: tinggi * 0.535,
               width: lebar * 0.9,
               decoration: BoxDecoration(
                 color: MainBgColor,
@@ -117,7 +117,7 @@ class ProfilePage extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.receipt_long_outlined,
-                                    size: 200,
+                                    size: tinggi / 4,
                                     color: Red,
                                   ),
                                   Text(
@@ -136,7 +136,6 @@ class ProfilePage extends StatelessWidget {
                             );
                           }
                           return ListView(
-                            physics: BouncingScrollPhysics(),
                             scrollDirection: Axis.vertical,
                             children: [
                               Column(
@@ -186,7 +185,7 @@ class ProfilePage extends StatelessWidget {
                                                 });
                                           },
                                           child: Container(
-                                            height: tinggi / 9,
+                                            height: tinggi / 10,
                                             width: lebar,
                                             decoration: BoxDecoration(
                                               color: Red,

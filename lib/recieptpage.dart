@@ -34,7 +34,7 @@ class RecieptPage extends StatelessWidget {
           children: [
             SizedBox(height: MediaQuery.of(context).size.height / 10),
             Container(
-              height: MediaQuery.of(context).size.height * 0.89,
+              height: MediaQuery.of(context).size.height * 0.85,
               width: MediaQuery.of(context).size.width * 0.9,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
