@@ -16,6 +16,7 @@ class RadioController extends GetxController {
   var buttonBayar = "".obs;
   int harga = 0;
   var jenis = "";
+  var gambar = "";
 
   void setButtonBayar(String value) {
     buttonBayar.value = value;

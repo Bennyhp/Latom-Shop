@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'homepage.dart';
 import 'misc/color.dart';
-import 'recieptpage.dart';
 import 'splashscreen.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Red,
         fontFamily: "Comfortaa",

@@ -24,10 +24,9 @@ class HomePageComps extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DarkRed,
+      backgroundColor: Red,
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -83,7 +82,7 @@ class HomePageComps extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Text(
-                "DAFTAR GAME",
+                "Daftar Game",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 35,

@@ -35,7 +35,6 @@ class DetailPage extends StatelessWidget {
       backgroundColor: DarkRed,
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
           child: Column(
             children: <Widget>[
               FutureBuilder(
@@ -110,6 +109,7 @@ class DetailPage extends StatelessWidget {
                                   rc.buttonTopup.value = e.id;
                                   rc.harga = e.get("harga_topup");
                                   rc.jenis = e.get("nama_topup");
+                                  rc.gambar = e.get("gambar_topup");
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -188,25 +188,50 @@ class DetailPage extends StatelessWidget {
                 width: 150,
                 child: OutlinedButton(
                   onPressed: () async {
-                    var userId = FirebaseAuth.instance.currentUser!.email;
-                    await FirebaseFirestore.instance
-                        .collection("transaksi")
-                        .add({
-                      "deskripsi": tc.ctrlIDPlayer.text,
-                      "harga_transaksi": rc.harga,
-                      "jenis_topup": rc.jenis,
-                      "metode_pembayaran": rc.buttonBayar.value,
-                      "nama_game": nama_game,
-                      "nama_user": userId,
-                      "tanggal_transaksi": Timestamp.now(),
-                    });
+                    if (tc.ctrlIDPlayer.text == "") {
+                      Get.snackbar(
+                        "Top Up Gagal",
+                        "Pastikan Inputan Tidak Kosong",
+                        duration: const Duration(seconds: 2),
+                        backgroundColor: Red,
+                        colorText: MainBgColor,
+                      );
+                    } else {
+                      var userId = FirebaseAuth.instance.currentUser!.email;
+                      await FirebaseFirestore.instance
+                          .collection("transaksi")
+                          .add({
+                        "deskripsi": tc.ctrlIDPlayer.text,
+                        "gambar_transaksi": rc.gambar,
+                        "harga_transaksi": rc.harga,
+                        "jenis_topup": rc.jenis,
+                        "metode_pembayaran": rc.buttonBayar.value,
+                        "nama_game": nama_game,
+                        "nama_user": userId,
+                        "tanggal_transaksi": Timestamp.now(),
+                      });
+                      Get.defaultDialog(
+                          title: "Perhatian",
+                          titleStyle: TextStyle(color: Red),
+                          middleText:
+                              "Transaksi Akan Dialihkan Ke Aplikasi e-Wallet\n\n" +
+                                  "Tekan Tombol Lanjut Untuk Kembali Ke Halaman Utama",
+                          middleTextStyle: TextStyle(color: Red),
+                          buttonColor: Red,
+                          textConfirm: "Lanjut",
+                          confirmTextColor: MainBgColor,
+                          onConfirm: () {
+                            Get.back();
+                            Get.back();
+                          });
+                    }
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: MainBgColor,
                     primary: Red,
                   ),
                   child: Text(
-                    "BELI",
+                    "Beli",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
